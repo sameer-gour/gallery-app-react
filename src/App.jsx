@@ -52,7 +52,7 @@ function App() {
  onClick={()=>{if (index>1) {
         setIndex(index-1)
       }}}  className='p-2 text-black text-2xl font-bold rounded-2xl  active:scale-95 bg-amber-400'>Prve</button>
-        <h2 className='text-2xl font-bold capitalize'>{index}</h2>
+        <h2 className='text-2xl font-bold capitalize'>{index-1}</h2>
       <button  onClick={()=>{setIndex(index+1)}}  className='p-2 text-black text-2xl font-bold rounded-2xl active:scale-95 bg-amber-400'>Next</button>
     </div>
     </div>
