@@ -1,23 +1,22 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-
+import Card from './card'
 
 function App() {
 
   const [usrdata, setusrdata] = useState([])
-  
+  const [index, setIndex] = useState(2)
 
 
   const getdata = async()=>{
-    const respons =  await axios.get('https://picsum.photos/v2/list?page=4&limit=18');
+    const respons =  await axios.get(`https://picsum.photos/v2/list?page=${index}&limit=10`);
     setusrdata(respons.data)  
-    console.log(respons.data);    
+    
   }
 
   useEffect(() => {
-    getdata() 
-    
-  }, [])
+    getdata()     
+  },[index])
   
 
   let printusrdata = (
@@ -31,12 +30,9 @@ function App() {
     printusrdata = usrdata.map(function (elem, idx) {
 
       return <div key={idx}>
-        <a href={elem.url} target='_blank'>
-          <div className='h-40 w-55 overflow-hidden  '>
-         <img className='rounded-xl h-full w-full object-cover' src={elem.download_url} alt="" />
+      <div className='overflow-hidden'>
+        <Card elem={elem}  />
       </div>
-        </a>
-       <h2 className='text-white text-xl'>{elem.author}</h2>
       </div>
      
     })
@@ -47,14 +43,17 @@ function App() {
     <>
     <div className='p-5 h-screen bg-black text-white'>
     
-      <div className='flex flex-wrap gap-5 p-2'>
+      <div className='flex flex-wrap gap-8 p-2'>
       {printusrdata}
     </div>
      
-    <div className='flex justify-center items-center  gap-5 mt-5'>
-      <button className='p-2 text-black text-2xl font-bold rounded-2xl bg-amber-400'>Prve</button>
-        <h2 className='text-2xl font-bold capitalize'>page 4</h2>
-      <button className='p-2 text-black text-2xl font-bold rounded-2xl bg-amber-400'>Next</button>
+    <div className='flex justify-center items-center  gap-8 mt-5 '>
+      <button           style={{ opacity: index == 1 ? 0.6 : 1 }}
+ onClick={()=>{if (index>1) {
+        setIndex(index-1)
+      }}}  className='p-2 text-black text-2xl font-bold rounded-2xl  active:scale-95 bg-amber-400'>Prve</button>
+        <h2 className='text-2xl font-bold capitalize'>{index}</h2>
+      <button  onClick={()=>{setIndex(index+1)}}  className='p-2 text-black text-2xl font-bold rounded-2xl active:scale-95 bg-amber-400'>Next</button>
     </div>
     </div>
 
