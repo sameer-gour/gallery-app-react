@@ -20,7 +20,7 @@ function App() {
   
 
   let printusrdata = (
-  <div className="flex justify-center items-center h-screen w-full text-gray-500">
+  <div className="flex justify-center items-center h-screen w-full text-gray-500 text-4xl">
     Loading...
   </div>
 );
